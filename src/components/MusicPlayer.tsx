@@ -27,11 +27,11 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
         playerRef.current = new window.YT.Player("youtube-audio-player", {
           height: "1",
           width: "1",
-          videoId: "sZrzFSd1YJU",
+          videoId: "bLYlTJgvLBw",
           playerVars: {
             autoplay: 0,
             loop: 1,
-            playlist: "sZrzFSd1YJU",
+            playlist: "bLYlTJgvLBw",
             controls: 0,
             showinfo: 0,
             autohide: 1,
