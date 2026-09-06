@@ -10,10 +10,12 @@ declare global {
 
 export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const playerRef = useRef<any>(null);
+  const isYouTubeFallback = useRef(false);
 
+  // Initialize YouTube player as fallback
   useEffect(() => {
-    // Load YouTube IFrame Player API if not already present
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -25,8 +27,8 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
       if (!window.YT || !window.YT.Player) return;
       try {
         playerRef.current = new window.YT.Player("youtube-audio-player", {
-          height: "1",
-          width: "1",
+          height: "100",
+          width: "100",
           videoId: "bLYlTJgvLBw",
           playerVars: {
             autoplay: 0,
@@ -37,18 +39,9 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
             autohide: 1,
             modestbranding: 1,
             enablejsapi: 1,
+            origin: window.location.origin,
           },
           events: {
-            onReady: (event: any) => {
-              if (autoPlay) {
-                try {
-                  event.target.playVideo();
-                  setIsPlaying(true);
-                } catch {
-                  /* autoplay block handled */
-                }
-              }
-            },
             onStateChange: (event: any) => {
               if (event.data === window.YT.PlayerState.PLAYING) {
                 setIsPlaying(true);
@@ -62,7 +55,7 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
           },
         });
       } catch {
-        /* player init handled */
+        /* player init error */
       }
     };
 
@@ -78,40 +71,94 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
           playerRef.current.destroy();
         }
       } catch {
-        /* cleanup handled */
+        /* cleanup */
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (autoPlay && playerRef.current && playerRef.current.playVideo) {
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+          isYouTubeFallback.current = false;
+        })
+        .catch(() => {
+          // Fallback to YouTube player if HTML5 audio cannot play
+          if (playerRef.current && playerRef.current.playVideo) {
+            try {
+              playerRef.current.playVideo();
+              setIsPlaying(true);
+              isYouTubeFallback.current = true;
+            } catch {
+              /* autoplay blocked */
+            }
+          }
+        });
+    } else if (playerRef.current && playerRef.current.playVideo) {
       try {
         playerRef.current.playVideo();
         setIsPlaying(true);
+        isYouTubeFallback.current = true;
       } catch {
-        /* autoplay error */
+        /* fallback error */
       }
+    }
+  };
+
+  const pauseAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    if (playerRef.current && playerRef.current.pauseVideo) {
+      try {
+        playerRef.current.pauseVideo();
+      } catch {
+        /* pause error */
+      }
+    }
+    setIsPlaying(false);
+  };
+
+  useEffect(() => {
+    if (autoPlay) {
+      playAudio();
     }
   }, [autoPlay]);
 
   const togglePlay = () => {
-    if (!playerRef.current) return;
-    try {
-      if (isPlaying) {
-        playerRef.current.pauseVideo();
-        setIsPlaying(false);
-      } else {
-        playerRef.current.playVideo();
-        setIsPlaying(true);
-      }
-    } catch {
-      /* playback error */
+    if (isPlaying) {
+      pauseAudio();
+    } else {
+      playAudio();
     }
   };
 
   return (
     <>
-      <div className="hidden pointer-events-none opacity-0" aria-hidden="true">
+      {/* Native HTML5 Audio for instant, seamless high-quality audio */}
+      <audio
+        ref={audioRef}
+        src="./assets/song.mp3"
+        loop
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onError={() => {
+          // Try m4a or YouTube fallback on error
+          if (audioRef.current && audioRef.current.src.endsWith(".mp3")) {
+            audioRef.current.src = "./assets/song.m4a";
+            if (autoPlay) audioRef.current.play().catch(() => {});
+          }
+        }}
+      />
+
+      {/* YouTube IFrame Player (kept off-screen rather than display:none so API functions properly) */}
+      <div
+        className="fixed -left-[9999px] -top-[9999px] w-12 h-12 pointer-events-none opacity-0"
+        aria-hidden="true"
+      >
         <div id="youtube-audio-player" />
       </div>
 
