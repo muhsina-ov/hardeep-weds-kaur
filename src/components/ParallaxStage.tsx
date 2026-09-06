@@ -9,12 +9,12 @@ import {
 import { wedding } from "../config";
 
 const LAYERS = {
-  sky: ".https://media.invitestory.in/petal-path-palace/assets/layers/05-sky-palace.png",
-  garden: ".https://media.invitestory.in/petal-path-palace/assets/layers/04-garden-guests.png",
-  couple: ".https://media.invitestory.in/petal-path-palace/assets/layers/03-couple.png",
-  foreground: ".https://media.invitestory.in/petal-path-palace/assets/layers/02-foreground-guests.png",
-  arch: ".https://media.invitestory.in/petal-path-palace/assets/layers/01-arch-frame.png",
-  full: ".https://media.invitestory.in/petal-path-palace/assets/layers/source-full.png",
+  sky: "./assets/layers/05-sky-palace.png",
+  garden: "./assets/layers/04-garden-guests.png",
+  couple: "./assets/layers/03-couple.png",
+  foreground: "./assets/layers/02-foreground-guests.png",
+  arch: "./assets/layers/01-arch-frame.png",
+  full: "./assets/layers/source-full.png",
 } as const;
 
 export default function ParallaxStage({ active }: { active: boolean }) {
@@ -193,7 +193,7 @@ export default function ParallaxStage({ active }: { active: boolean }) {
 
         {/* Hero typography — brand first */}
         <motion.div
-          className="absolute inset-x-0 bottom-[13%] z-[8] flex flex-col items-center px-6 text-center"
+          className="absolute inset-x-0 bottom-[10%] z-[8] flex flex-col items-center px-6 text-center"
           style={{ y: textY, opacity: textOpacity }}
         >
           <motion.p
@@ -208,11 +208,11 @@ export default function ParallaxStage({ active }: { active: boolean }) {
             initial={{ opacity: 0, y: 16 }}
             animate={active ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 1.25, duration: 0.95 }}
-            className="mt-3 font-script text-[10vw] leading-[1.05] text-[#faf3eb] drop-shadow-[0_8px_28px_rgba(20,5,25,0.55)] sm:text-6xl text-center"
+            className="mt-2 flex flex-col items-center justify-center font-script text-4xl leading-[1.2] text-[#faf3eb] drop-shadow-[0_8px_28px_rgba(20,5,25,0.55)] sm:text-6xl text-center"
           >
-            {wedding.groom}
-            <span className="mx-2 text-[#f2c4d0]">&</span>
-            {wedding.bride}
+            <span className="block text-center">{wedding.groom}</span>
+            <span className="my-0.5 block text-2xl sm:text-3xl text-[#f2c4d0] text-center">&</span>
+            <span className="block text-center">{wedding.bride}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}

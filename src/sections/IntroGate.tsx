@@ -93,7 +93,7 @@ export default function IntroGate({
               }}
             />
             <img
-              src=".https://media.invitestory.in/petal-path-palace/assets/layers/03-couple.png"
+              src="./assets/layers/03-couple.png"
               alt=""
               className="relative h-32 w-auto object-contain sm:h-40"
               style={{ animation: "float-soft 5s ease-in-out infinite" }}
@@ -106,9 +106,10 @@ export default function IntroGate({
           <p className="text-[11px] uppercase tracking-[0.45em] text-[#faf3eb]/65">
             You are cordially invited to
           </p>
-          <h1 className="font-script text-4xl leading-tight text-[#faf3eb] sm:text-5xl">
-            {wedding.groom}{" "}
-            <span className="text-[#f2c4d0]">&</span> {wedding.bride}
+          <h1 className="flex flex-col items-center justify-center font-script text-4xl leading-tight text-[#faf3eb] sm:text-5xl text-center">
+            <span className="block text-center">{wedding.groom}</span>
+            <span className="my-0.5 block text-2xl sm:text-3xl text-[#f2c4d0] text-center">&</span>
+            <span className="block text-center">{wedding.bride}</span>
           </h1>
           <p className="text-[11px] uppercase tracking-[0.3em] text-[#c9a86a]">
             {wedding.dateLabel}
