@@ -208,7 +208,7 @@ export default function ParallaxStage({ active }: { active: boolean }) {
             initial={{ opacity: 0, y: 16 }}
             animate={active ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 1.25, duration: 0.95 }}
-            className="mt-3 font-script text-[13.5vw] leading-[0.95] text-[#faf3eb] drop-shadow-[0_8px_28px_rgba(20,5,25,0.55)] sm:text-7xl"
+            className="mt-3 font-script text-[10vw] leading-[1.05] text-[#faf3eb] drop-shadow-[0_8px_28px_rgba(20,5,25,0.55)] sm:text-6xl text-center"
           >
             {wedding.groom}
             <span className="mx-2 text-[#f2c4d0]">&</span>

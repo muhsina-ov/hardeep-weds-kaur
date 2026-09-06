@@ -3,8 +3,8 @@
 // ─────────────────────────────────────────────────────────────
 
 export const wedding = {
-  bride: "Dalwinder",
-  groom: "Hardeep",
+  bride: "Dalwinder Kaur",
+  groom: "Hardeep Singh",
   brideFull: "Dalwinder Kaur",
   groomFull: "Hardeep Singh",
   brideParents: "Daughter of Smt. Charanjit Kaur & Late S. Harmail Singh",

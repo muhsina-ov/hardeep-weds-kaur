@@ -106,7 +106,7 @@ export default function IntroGate({
           <p className="text-[11px] uppercase tracking-[0.45em] text-[#faf3eb]/65">
             You are cordially invited to
           </p>
-          <h1 className="font-script text-5xl leading-tight text-[#faf3eb] sm:text-6xl">
+          <h1 className="font-script text-4xl leading-tight text-[#faf3eb] sm:text-5xl">
             {wedding.groom}{" "}
             <span className="text-[#f2c4d0]">&</span> {wedding.bride}
           </h1>
