@@ -50,14 +50,14 @@ export const wedding = {
       dayNum: "01",
       monthLabel: "November 2026",
       time: "10:00 AM Onwards",
-      venue: "Gurudwara Bhaini Sahib & The Grand Venice, Bhadaur",
-      note: "Sacred Anand Karaj ceremony at Gurudwara Bhaini Sahib followed by Barat & lunch reception at The Grand Venice.",
+      venue: "Gurudwara Sri Guru Hargobind Sahib Ji Bhaini & The Grand Venice, Bhadaur",
+      note: "Sacred Anand Karaj ceremony at Gurudwara Sri Guru Hargobind Sahib Ji Bhaini followed by Barat & lunch reception at The Grand Venice.",
     },
   ],
 
   program: [
     { name: "Baraat Departure", time: "9:00 AM" },
-    { name: "Anand Karaj (Gurudwara Bhaini Sahib)", time: "10:30 AM" },
+    { name: "Anand Karaj (Gurudwara Sri Guru Hargobind Sahib Ji Bhaini)", time: "10:30 AM" },
     { name: "Milni & Welcome (The Grand Venice)", time: "12:30 PM" },
     { name: "Guru Ka Langar & Lunch Reception", time: "1:30 PM" },
   ],
