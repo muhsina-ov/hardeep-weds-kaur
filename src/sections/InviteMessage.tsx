@@ -11,15 +11,30 @@ export default function InviteMessage() {
         </p>
         <div className="mt-6 h-px w-20 bg-gradient-to-r from-transparent via-[#f2c4d0]/40 to-transparent" />
 
-        {/* Couple Portrait */}
-        <div className="relative mt-9 group">
-          <div className="absolute -inset-2.5 rounded-[2.5rem] bg-gradient-to-r from-[#c45a7a]/35 via-[#f2c4d0]/25 to-[#c9a86a]/35 blur-xl opacity-80 group-hover:opacity-100 transition duration-700" />
-          <div className="relative overflow-hidden rounded-[2.2rem] border border-[#f2c4d0]/35 bg-[#2a1830]/90 p-2.5 shadow-[0_25px_60px_rgba(0,0,0,0.45)] ring-1 ring-[#f2c4d0]/20">
-            <img
-              src="./assets/couple-illustration.jpg"
-              alt={`${wedding.groomFull} & ${wedding.brideFull}`}
-              className="h-72 w-72 sm:h-80 sm:w-80 rounded-[1.8rem] object-cover object-top"
-            />
+        {/* Dual Couple Portraits */}
+        <div className="relative mt-9 grid grid-cols-1 sm:grid-cols-2 gap-5 w-full max-w-lg">
+          {/* Photo 1: Custom Illustration */}
+          <div className="relative group flex flex-col items-center">
+            <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-[#c45a7a]/35 via-[#f2c4d0]/25 to-[#c9a86a]/35 blur-xl opacity-75 group-hover:opacity-100 transition duration-500" />
+            <div className="relative overflow-hidden rounded-[1.8rem] border border-[#f2c4d0]/35 bg-[#2a1830]/90 p-2 shadow-[0_20px_45px_rgba(0,0,0,0.45)] ring-1 ring-[#f2c4d0]/20 w-full aspect-[4/5]">
+              <img
+                src="./assets/couple-illustration.jpg"
+                alt={`${wedding.groomFull} & ${wedding.brideFull} Illustration`}
+                className="h-full w-full rounded-[1.4rem] object-cover object-top transition duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Photo 2: Real Couple Photo */}
+          <div className="relative group flex flex-col items-center">
+            <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-[#c9a86a]/35 via-[#f2c4d0]/25 to-[#c45a7a]/35 blur-xl opacity-75 group-hover:opacity-100 transition duration-500" />
+            <div className="relative overflow-hidden rounded-[1.8rem] border border-[#f2c4d0]/35 bg-[#2a1830]/90 p-2 shadow-[0_20px_45px_rgba(0,0,0,0.45)] ring-1 ring-[#f2c4d0]/20 w-full aspect-[4/5]">
+              <img
+                src="./assets/couple-photo.jpg"
+                alt={`${wedding.groomFull} & ${wedding.brideFull} Photo`}
+                className="h-full w-full rounded-[1.4rem] object-cover object-top transition duration-500 group-hover:scale-105"
+              />
+            </div>
           </div>
         </div>
         
