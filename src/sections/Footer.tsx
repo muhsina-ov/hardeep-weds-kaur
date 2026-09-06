@@ -54,6 +54,9 @@ export default function Footer() {
           With love, the {wedding.groom} & {wedding.bride} families
         </p>
         <div className="h-px w-28 bg-[#f2c4d0]/25" />
+        <p className="font-script text-3xl sm:text-4xl text-[#f2c4d0] tracking-wider">
+          {wedding.hashtag}
+        </p>
         <motion.button
           type="button"
           onClick={copyHashtag}

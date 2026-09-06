@@ -13,7 +13,7 @@ export const wedding = {
   brideFather: "Late S. Harmail Singh",
   brideMother: "Smt. Charanjit Kaur",
   brideParents: "D/o Smt. Charanjit Kaur & Late S. Harmail Singh",
-  hashtag: "#HardeepWedsDalwinder",
+  hashtag: "#Hardil",
   monogram: "H · D",
 
   dateISO: "2026-11-01T10:00:00+05:30",

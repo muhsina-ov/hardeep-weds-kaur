@@ -10,6 +10,7 @@ import Footer from "../sections/Footer";
 import ParallaxStage from "../components/ParallaxStage";
 import FallingPetals from "../components/FallingPetals";
 import ScrollProgress from "../components/ScrollProgress";
+import MusicPlayer from "../components/MusicPlayer";
 import { wedding } from "../config";
 
 type Stage = "closed" | "opening" | "open";
@@ -47,6 +48,8 @@ export default function Home() {
       {wedding.sections?.events !== false && <Events />}
       {wedding.sections?.venue !== false && <Venue />}
       <Footer />
+
+      <MusicPlayer autoPlay={stage !== "closed"} />
 
       {stage === "open" && <FallingPetals count={26} />}
 
