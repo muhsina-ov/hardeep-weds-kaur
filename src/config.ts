@@ -35,9 +35,9 @@ export const wedding = {
   events: [
     {
       name: "Jaggo Ceremony",
-      date: "Friday, 30th October 2026",
-      dayLabel: "Friday",
-      dayNum: "30",
+      date: "Saturday, 31st October 2026",
+      dayLabel: "Saturday",
+      dayNum: "31",
       monthLabel: "October 2026",
       time: "7:00 PM Onwards",
       venue: "Family Residence",

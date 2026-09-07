@@ -29,11 +29,11 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
         playerRef.current = new window.YT.Player("youtube-audio-player", {
           height: "100",
           width: "100",
-          videoId: "bLYlTJgvLBw",
+          videoId: "oxh9Gtq6VCU",
           playerVars: {
             autoplay: 0,
             loop: 1,
-            playlist: "bLYlTJgvLBw",
+            playlist: "oxh9Gtq6VCU",
             controls: 0,
             showinfo: 0,
             autohide: 1,
@@ -45,11 +45,16 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
             onStateChange: (event: any) => {
               if (event.data === window.YT.PlayerState.PLAYING) {
                 setIsPlaying(true);
-              } else if (
-                event.data === window.YT.PlayerState.PAUSED ||
-                event.data === window.YT.PlayerState.ENDED
-              ) {
+              } else if (event.data === window.YT.PlayerState.PAUSED) {
                 setIsPlaying(false);
+              } else if (event.data === window.YT.PlayerState.ENDED) {
+                // Ensure loop playback on YouTube fallback
+                try {
+                  playerRef.current?.seekTo(0);
+                  playerRef.current?.playVideo();
+                } catch {
+                  setIsPlaying(false);
+                }
               }
             },
           },
@@ -140,19 +145,21 @@ export default function MusicPlayer({ autoPlay = false }: { autoPlay?: boolean }
       {/* Native HTML5 Audio for instant, seamless high-quality audio */}
       <audio
         ref={audioRef}
-        src="./assets/song.mp3"
         loop
         preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onError={() => {
-          // Try m4a or YouTube fallback on error
-          if (audioRef.current && audioRef.current.src.endsWith(".mp3")) {
-            audioRef.current.src = "./assets/song.m4a";
-            if (autoPlay) audioRef.current.play().catch(() => {});
+        onEnded={() => {
+          if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play().catch(() => {});
           }
         }}
-      />
+      >
+        <source src="./assets/song.webm" type="audio/webm" />
+        <source src="./assets/song.m4a" type="audio/mp4" />
+        <source src="./assets/song.mp3" type="audio/mpeg" />
+      </audio>
 
       {/* YouTube IFrame Player (kept off-screen rather than display:none so API functions properly) */}
       <div
